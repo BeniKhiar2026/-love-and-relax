@@ -21,7 +21,7 @@ const tuscanyMissions=['Find the prettiest doorway in Florence and take a photo 
 const premiereNotes=["“The best part of Paris isn't a place. It's who I'm sharing it with.”","“At 17:05, the waiting ends and our next chapter begins.”","“Of all the streets in Paris, my favorite will be the one we walk together.”","“Tonight, we don't count the hours. We make them unforgettable.”"];let premiereIndex=0;document.getElementById('premiere-reveal').onclick=()=>{premiereIndex=(premiereIndex+1)%premiereNotes.length;document.getElementById('premiere-note').textContent=premiereNotes[premiereIndex]};
 const ideas=['Choose a song that will always remind us of Paris. 🎶','Take a picture holding hands in front of the Christmas lights. ✨','Order one dessert and share it. 🍰','At dinner, tell each other your favorite memory of the day. 🥂','Pick a tiny souvenir that will remind us of this trip. 💌','Find a beautiful spot in Florence and stay there for ten minutes doing absolutely nothing. ❤️','Make a wish together at the Trevi Fountain. ⛲'];let n=0;document.getElementById('surprise').onclick=()=>{document.getElementById('idea').textContent=ideas[n++%ideas.length]};
 const target=Date.parse('2026-12-15T17:05:00+01:00');function tick(){let s=Math.max(0,Math.floor((target-Date.now())/1000));[Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),s%60].forEach((v,i)=>document.getElementById(['d','h','m','s'][i]).textContent=String(v).padStart(2,'0'));if(s===0)document.getElementById('clock-label').textContent='Together in Paris ♥'}tick();setInterval(tick,1000);
-</script><script>
+</script><button type="button" id="music-toggle" aria-pressed="false" aria-label="Play romantic instrumental music">♫ Play our music</button><script>
 (function(){
 const btn=document.getElementById('music-toggle');
 let ctx=null, gain=null, timer=null, nextTime=0, index=0, playing=false;
@@ -60,4 +60,4 @@ btn.addEventListener('click',async function(){
  }catch(e){stop();btn.textContent='♫ Music unavailable'}
 });
 })();
-</script><button type="button" id="music-toggle" aria-pressed="false" aria-label="Play romantic instrumental music">♫ Play our music</button></body></html>
+</script></body></html>
