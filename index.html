@@ -21,56 +21,21 @@ const tuscanyMissions=['Find the prettiest doorway in Florence and take a photo 
 const premiereNotes=["“The best part of Paris isn't a place. It's who I'm sharing it with.”","“At 17:05, the waiting ends and our next chapter begins.”","“Of all the streets in Paris, my favorite will be the one we walk together.”","“Tonight, we don't count the hours. We make them unforgettable.”"];let premiereIndex=0;document.getElementById('premiere-reveal').onclick=()=>{premiereIndex=(premiereIndex+1)%premiereNotes.length;document.getElementById('premiere-note').textContent=premiereNotes[premiereIndex]};
 const ideas=['Choose a song that will always remind us of Paris. 🎶','Take a picture holding hands in front of the Christmas lights. ✨','Order one dessert and share it. 🍰','At dinner, tell each other your favorite memory of the day. 🥂','Pick a tiny souvenir that will remind us of this trip. 💌','Find a beautiful spot in Florence and stay there for ten minutes doing absolutely nothing. ❤️','Make a wish together at the Trevi Fountain. ⛲'];let n=0;document.getElementById('surprise').onclick=()=>{document.getElementById('idea').textContent=ideas[n++%ideas.length]};
 const target=Date.parse('2026-12-15T17:05:00+01:00');function tick(){let s=Math.max(0,Math.floor((target-Date.now())/1000));[Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),s%60].forEach((v,i)=>document.getElementById(['d','h','m','s'][i]).textContent=String(v).padStart(2,'0'));if(s===0)document.getElementById('clock-label').textContent='Together in Paris ♥'}tick();setInterval(tick,1000);
-</script><button type="button" id="music-toggle" aria-pressed="false" aria-label="Play romantic instrumental music">♫ Play our music</button><script>
-/* Original romantic melody rendered as a WAV file in the browser.
-   Uses HTML media playback rather than WebAudio oscillators for iPhone compatibility. */
+</script><p style="font-size:11px;text-align:center;opacity:.75;margin:12px auto 0">Soundtrack: Frédéric Chopin · Nocturne Op. 9 No. 2 · <a href="https://commons.wikimedia.org/wiki/File:Nocturne_Op._9_no._2_in_E_flat_major.mp3" target="_blank" rel="noopener">Recording via Musopen / Wikimedia Commons</a></p><button type="button" id="music-toggle" aria-pressed="false" aria-label="Play romantic instrumental music">♫ Play our music</button><script>
 (function(){
  const btn=document.getElementById('music-toggle');
  if(!btn)return;
  const audio=document.createElement('audio');
- audio.loop=true;audio.preload='auto';audio.volume=1;
+ audio.src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Nocturne%20Op.%209%20no.%202%20in%20E%20flat%20major.mp3";
+ audio.preload='none';audio.loop=true;audio.volume=.65;
  audio.setAttribute('playsinline','');
  document.body.appendChild(audio);
- const rate=22050, duration=16, samples=rate*duration;
- const wav=new ArrayBuffer(44+samples*2), view=new DataView(wav);
- function str(offset,s){for(let i=0;i<s.length;i++)view.setUint8(offset+i,s.charCodeAt(i))}
- str(0,'RIFF');view.setUint32(4,36+samples*2,true);str(8,'WAVE');str(12,'fmt ');
- view.setUint32(16,16,true);view.setUint16(20,1,true);view.setUint16(22,1,true);
- view.setUint32(24,rate,true);view.setUint32(28,rate*2,true);view.setUint16(32,2,true);view.setUint16(34,16,true);
- str(36,'data');view.setUint32(40,samples*2,true);
- const chords=[[261.63,329.63,392,523.25],[220,261.63,329.63,440],[174.61,220,261.63,349.23],[196,246.94,293.66,392]];
- const pattern=[0,2,1,3,2,1,0,2];
- function voice(freq,t,start,length){
-   const age=t-start;
-   if(age<0||age>length)return 0;
-   const env=Math.min(1,age/.025)*Math.pow(1-age/length,1.7);
-   const phase=2*Math.PI*freq*age;
-   return env*(Math.sin(phase)+.26*Math.sin(2*phase)+.10*Math.sin(3*phase));
- }
- for(let i=0;i<samples;i++){
-   const t=i/rate, beat=Math.floor(t/.5), chord=chords[Math.floor(beat/8)%4];
-   let v=0;
-   for(let b=Math.max(0,beat-3);b<=beat;b++){
-     const c=chords[Math.floor(b/8)%4];
-     v+=.23*voice(c[pattern[b%8]],t,b*.5,1.35);
-   }
-   const chordStart=Math.floor(t/4)*4;
-   const bassChord=chords[Math.floor(t/4)%4];
-   v+=.19*voice(bassChord[0]/2,t,chordStart,3.85);
-   v+=.09*voice(bassChord[2]/2,t,chordStart+.12,3.65);
-   const fade=Math.min(1,t/.4,(duration-t)/.4);
-   view.setInt16(44+i*2,Math.round(Math.max(-1,Math.min(1,v*fade))*28000),true);
- }
- audio.src=URL.createObjectURL(new Blob([wav],{type:'audio/wav'}));
  btn.addEventListener('click',async()=>{
-   if(!audio.paused){audio.pause();btn.textContent='♫ Play our music';btn.setAttribute('aria-pressed','false');return}
-   btn.textContent='♫ Starting music…';
-   try{
-     audio.muted=false;audio.volume=1;
-     await audio.play();
-     btn.textContent='♫ Pause music';btn.setAttribute('aria-pressed','true');
-   }catch(e){btn.textContent='♫ Tap to retry music';btn.setAttribute('aria-pressed','false')}
+  if(!audio.paused){audio.pause();btn.textContent='♫ Play our music';btn.setAttribute('aria-pressed','false');return}
+  btn.textContent='♫ Loading romantic piano…';
+  try{await audio.play();btn.textContent='♫ Pause music';btn.setAttribute('aria-pressed','true')}
+  catch(e){btn.textContent='♫ Try playing again';btn.setAttribute('aria-pressed','false')}
  });
- audio.addEventListener('error',()=>{btn.textContent='♫ Audio error — retry'});
+ audio.addEventListener('error',()=>{btn.textContent='♫ Music unavailable — retry'});
 })();
 </script></body></html>
