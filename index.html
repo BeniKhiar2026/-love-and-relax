@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#251b28"><title>Love & Relax | Paris 2026</title>
+<style>
+:root{color-scheme:dark;--pink:#f6cbd2;--cream:#fff3e9;--muted:#d8c7cf}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Georgia,'Times New Roman',serif;background:#211924;color:var(--cream);line-height:1.5}
+.hero{min-height:94vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:65px 20px;background:linear-gradient(180deg,rgba(20,12,24,.25),#211924),radial-gradient(ellipse at 50% 35%,#755062 0%,#392638 47%,#211924 90%)}
+.inner{max-width:860px}.eyebrow{letter-spacing:.32em;text-transform:uppercase;font:12px system-ui,sans-serif;color:var(--pink)}h1{font-size:clamp(64px,13vw,130px);font-weight:normal;line-height:1.03;margin:24px 0 12px}h1 em{color:var(--pink);font-weight:normal} .subtitle{font-size:clamp(20px,4vw,30px);font-style:italic;margin:16px 0 40px}
+.rule{height:1px;background:linear-gradient(90deg,transparent,#bb8f9f,transparent);margin:34px auto;max-width:520px}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:25px auto;max-width:650px}.unit{border:1px solid #806472;border-radius:16px;padding:16px 4px;background:#ffffff09}.number{display:block;font:clamp(32px,7vw,60px) Georgia,serif;font-variant-numeric:tabular-nums}.unit small{font:11px system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.when{font:14px system-ui,sans-serif;color:var(--muted);margin-top:20px}.heart{font-size:42px;color:#e9a8b7}
+section{max-width:900px;margin:auto;padding:65px 22px}h2{text-align:center;font-size:42px;font-weight:normal;margin:0 0 12px} .section-note{text-align:center;color:var(--muted);font-style:italic;margin:0 0 42px}
+.timeline{border-left:1px solid #8c6979;margin-left:15px;padding-left:30px}.day{position:relative;margin:0 0 32px}.day:before{content:'♥';position:absolute;left:-39px;top:0;color:var(--pink);background:#211924}.date{color:var(--pink);font:12px system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase}.day h3{font-size:24px;font-weight:normal;margin:7px 0}.day p{margin:5px 0;color:var(--muted);font:15px/1.7 system-ui,sans-serif}
+footer{text-align:center;padding:55px 20px 85px;color:var(--pink);font-style:italic;font-size:24px}a{color:var(--pink)}@media(max-width:420px){.countdown{gap:6px}.unit{padding:12px 2px}.unit small{font-size:9px}section{padding:48px 20px}}
+</style></head><body>
+<header class="hero"><div class="inner">
+<div class="eyebrow">Mehdi &amp; Dorsaf · December 2026</div><div class="heart" aria-hidden="true">♥</div>
+<h1>Love <em>&amp;</em><br>Relax</h1><p class="subtitle">No stress. Only love &amp; relax.</p>
+<div class="rule"></div><div class="eyebrow" id="count-title">Until we meet again in Paris</div>
+<div class="countdown" role="timer" aria-label="Countdown to our reunion">
+<div class="unit"><span class="number" id="days">--</span><small>Days</small></div>
+<div class="unit"><span class="number" id="hours">--</span><small>Hours</small></div>
+<div class="unit"><span class="number" id="minutes">--</span><small>Minutes</small></div>
+<div class="unit"><span class="number" id="seconds">--</span><small>Seconds</small></div></div>
+<div class="when">Tuesday, December 15, 2026 · 17:05 · Paris time (CET)</div>
+</div></header>
+<main><section><h2>Our journey</h2><p class="section-note">From Paris to Florence and Rome — moments to treasure together.</p>
+<div class="timeline">
+<div class="day"><div class="date">December 15 · Paris</div><h3>At last, together ❤️</h3><p>17:05 — Our Paris reunion.</p><p>21:30 — Dinner at Relais de l’Entrecôte Saint-Germain.</p></div>
+<div class="day"><div class="date">December 16 · Paris</div><h3>Paris, just us</h3><p>Dinner at Brach.</p></div>
+<div class="day"><div class="date">December 17–19 · Florence</div><h3>La dolce vita</h3><p>Florence, Tuscany and time to wander together.</p><p>December 18 — Car outing, Florence outlet, Pisa and Lucca.</p><p>December 19, 21:00 — Atto di Vito Mollica.</p></div>
+<div class="day"><div class="date">December 20 · Rome</div><h3>All roads lead to love</h3><p>Train to Rome, 13:28–15:13.</p><p>Dinner at Osteria La Segreta.</p></div>
+<div class="day"><div class="date">December 21 · Rome</div><h3>One more beautiful day</h3><p>Breakfast at Barnum.</p><p>13:30 — Il Vero Alfredo.</p><p>Dinner at Seen by Olivier.</p></div>
+<div class="day"><div class="date">December 22 · Rome</div><h3>Until our next adventure</h3><p>A journey to remember.</p></div>
+</div></section></main><footer>Every moment with you is the destination. ♥</footer>
+<script>
+const target=Date.parse('2026-12-15T17:05:00+01:00');
+function tick(){let diff=Math.max(0,target-Date.now()),s=Math.floor(diff/1000);
+const parts=[Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),s%60];
+['days','hours','minutes','seconds'].forEach((id,i)=>document.getElementById(id).textContent=String(parts[i]).padStart(2,'0'));
+if(diff===0)document.getElementById('count-title').textContent='Together in Paris ♥';
+}tick();setInterval(tick,1000);
+</script></body></html>
